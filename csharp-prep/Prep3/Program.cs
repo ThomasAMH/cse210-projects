@@ -9,7 +9,7 @@ class Program
         string userInput = "";
         int magicNumber = randomGenerator.Next(1, 11);
         
-        Console.WriteLine("This is the magic number game! Try to guess the Magic Number between 1 and 10. Enter Q to quit.");
+        Console.WriteLine("This is the magic number game! Try to guess the Magic Number between 1 and 10.");
         //Game loop
 
         do {
@@ -33,10 +33,10 @@ class Program
             
             //Prepare next gamestate. Prompt user to go or quit.
             magicNumber = randomGenerator.Next(1, 11);
-            Console.WriteLine("Play again? (Enter Q to quit, or anything else to continue)");
+            Console.WriteLine("Play again? (Enter yes to repeat, or anything else to quit.)");
             userInput= Console.ReadLine();
             
-        } while(userInput != "Q");
+        } while(userInput == "yes");
         
     }
 }
