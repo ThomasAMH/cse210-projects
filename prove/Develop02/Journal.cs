@@ -1,5 +1,5 @@
 using System;
-
+using System.IO;
 class Journal {   
     private DateTime _creationDate;
     public string _journalName;
@@ -87,19 +87,30 @@ class Journal {
     Console.WriteLine("");
     }
 
-    public List<string> PackageJournalInfo() {
-        List<string> journalPackage = new List<string>();
-        
-        journalPackage.Add(_creationDate.ToShortDateString());
-        journalPackage.Add(_journalName);
-        journalPackage.Add(_authorName);
-        journalPackage.Add(_authorNote);
-        journalPackage.Add(_enabledPrompts.ToString());
-        journalPackage.Add(promptsPath);
+    public async void SaveJournalToFile() {
 
-        foreach( Entry e in _entries ) {
+        //FIXME
+        //Overwrites journalname.txt in the folder location that Program.cs is run!
+        string fileName = _journalName + ".txt";
+
+
+        // List<string> journalPackage = new List<string>();
+        
+        
+
+        string[] journalInfo = {
+            _creationDate.ToShortDateString(),
+            _journalName,
+            _authorName,
+            _authorNote,
+            _enabledPrompts.ToString(),
+            promptsPath,
+        };
+
+            await File.WriteAllLinesAsync(fileName, journalInfo);
+        // foreach( Entry e in _entries ) {
             
-        }
+        //}
 
     
     }

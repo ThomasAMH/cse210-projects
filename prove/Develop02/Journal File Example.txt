@@ -1,0 +1,14 @@
+Journal File Example (.pjf = persona journal file)
+
+//File is laid out in lines, but JSON would be better!
+
+ _creationDate;
+ _journalName;
+ _authorName;
+ _authorNote;
+ _enabledPrompts;
+promptsPath = "prompts.txt";
+
+//Entries
+Length in hundreds of characters to allow file lines to be happy.
+

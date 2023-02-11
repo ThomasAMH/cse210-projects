@@ -1,4 +1,3 @@
-
 class AppControls
 {
     public bool _journalOpen = false;

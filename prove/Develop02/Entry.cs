@@ -72,10 +72,14 @@ public void WriteEntry() {
     } while(true);
 }
 
-public List<string> PackageEntry() {
-    List<string> package = new List<string>();
+// public List<string> SaveEntriesToFile(string fileName) {
+//     //Pack all entries into an array of a string to be saved
+//     //# of pages an an entry, then the entry itself
+//     //Example:
+//     //Entry Creation Date
+//     //Prompt
+//     //Blablablaf
+//     //Bla bla bla
 
-    package.Add()
-
-}
+//     }
 }
