@@ -1,10 +1,10 @@
 public class ReviewScripture {
     //List of visible word positions
-    private List<int> positionsList = new List<int>();
+    private List<int> _positionsList = new List<int>();
     //The mutated verse in an iterateable form
-    private string[] ScriptureWordList;
-    private string userString;
-    private bool lastMutation = false;
+    private string[] _ScriptureWordList;
+    private string _userString;
+    private bool _lastMutation = false;
     public ReviewScripture(Scripture ActiveScripture) {
         //Composite verse that will be broken up into the array
         string mutatedVerseString = "";
@@ -14,29 +14,29 @@ public class ReviewScripture {
         }
 
         //Create an array of words for each verse in the scripture (2D array)
-        ScriptureWordList = mutatedVerseString.Split(" ");
+        _ScriptureWordList = mutatedVerseString.Split(" ");
         //Create an array of true's for each word in the scripture
-        for (int i = 0; i <= ScriptureWordList.Count() - 1; i++) {
-            positionsList.Add(i);
+        for (int i = 0; i <= _ScriptureWordList.Count() - 1; i++) {
+            _positionsList.Add(i);
         }
 
         Console.Clear();
         Console.WriteLine($"Now reviewing: {ActiveScripture.FullReference}");
-        displayMutatedScripture(ScriptureWordList);
-        userString = Console.ReadLine();
+        displayMutatedScripture(_ScriptureWordList);
+        _userString = Console.ReadLine();
         
-        while(userString != "Quit") {
+        while(_userString != "Quit") {
             //Display modified scripture
             Console.Clear();
-            muatateScripture(positionsList, ScriptureWordList);
-            displayMutatedScripture(ScriptureWordList);
-            if(lastMutation) {
+            muatateScripture(_positionsList, _ScriptureWordList);
+            displayMutatedScripture(_ScriptureWordList);
+            if(_lastMutation) {
                 Console.Clear();
                 Console.WriteLine("All done!");    
                 break;
             }
             Console.WriteLine("Enter Quit to exit, or spam enter.");
-            userString = Console.ReadLine();
+            _userString = Console.ReadLine();
         }
     }
 
@@ -82,7 +82,7 @@ public class ReviewScripture {
                     fillerString = fillerString + "_";
                 }
                 ScriptureWordList[positionsList[i-1]] = ScriptureWordList[positionsList[i-1]].Replace(ScriptureWordList[positionsList[i-1]], fillerString);
-                lastMutation = true;
+                _lastMutation = true;
             }
         }   
     }
