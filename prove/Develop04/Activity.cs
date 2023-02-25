@@ -4,7 +4,7 @@ abstract class Activity {
     //This class has no public returnables.
 
 //Hard coded values for use by all child classes for uniform behavior
-    private int _PauseDuration = 6;
+    private int _PauseDuration = 4;
     private string _EndingMessage = "All done! ~(*.*~) (~*.*)~";
     //Used for animating the waiting animation
     private string[] _WaitingAnimationFrames = {
@@ -21,7 +21,14 @@ abstract class Activity {
     //These two are hard coded into the child classes
     protected string ActivityName;
     protected string ActivityDescription;
+    protected void Countdown(int duration) {
+        for (int i = duration; i > 0; i--) {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b");
+        }
 
+    }
     protected void DisplayStartingMessage() {
         Console.Clear();
         Console.WriteLine($"Now starting: {ActivityName}");

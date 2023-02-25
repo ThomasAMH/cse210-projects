@@ -21,10 +21,23 @@ class App {
 
         switch(userInt) {
             case 1:
-                BreathingActivity routine = new BreathingActivity();
-                routine.RunBreathingActivity();
-            break;
+                BreathingActivity BreathingActivityRoutine = new BreathingActivity();
+                BreathingActivityRoutine.RunBreathingActivity();
+                break;
+            case 2:
+                ReflectionActivity ReflectionActivityroutine = new ReflectionActivity();
+                ReflectionActivityroutine.RunReflectionActivity();
+                break;
+            case 3:
+                ListingActivity ListingActivityroutine = new ListingActivity();
+                ListingActivityroutine.RunListingActivity();
+                break;
+            case 4:
+                continueExecution = false;
+                break;
+            default:
+                Console.WriteLine("Invalid input!");
+                break;
         }
-
     }
 }

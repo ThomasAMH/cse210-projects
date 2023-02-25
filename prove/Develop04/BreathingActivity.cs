@@ -19,15 +19,8 @@ class BreathingActivity : Activity {
             Console.WriteLine("Breathe out...");
             Countdown(BreatheoutTimeSeconds);
         }
+
         Console.WriteLine();
         DisplayEndingMessage();
-    }
-
-    private void Countdown(int duration) {
-        for (int i = duration; i > 0; i--) {
-            Console.Write(i);
-            Thread.Sleep(1000);
-            Console.Write("\b");
-        }
     }
 }
