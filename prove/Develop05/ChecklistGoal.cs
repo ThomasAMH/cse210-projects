@@ -31,7 +31,17 @@ class ChecklistGoal : Goal {
 
         Console.WriteLine("Goal recorded. Press Enter to continue");
         string unused = Console.ReadLine();
-    }    
+    }
+    public ChecklistGoal(string fileGoalText, bool fileIsCompleted, int filePointsValue, int fileBonusPointValue, int fileCurrentCompletion, int fileTotalNeededCompletion) {
+        description = "These are goals that must be done several times before they're truely complete.";
+        goalText = fileGoalText;
+        isCompleted = fileIsCompleted;
+        pointValue = filePointsValue;
+        _bonusPoints = fileBonusPointValue;
+        _currentCompletionChecks = fileCurrentCompletion;
+        _totalNeededCompletionChecks = fileTotalNeededCompletion;
+    }
+
     public override void RecordEvent(User associatedUser) {
         _currentCompletionChecks++;
 
@@ -50,5 +60,18 @@ class ChecklistGoal : Goal {
         } else {
             Console.Write($"{_currentCompletionChecks}/{_totalNeededCompletionChecks}");
         }
+    }
+
+        public override string StringifyObject() {
+        //Store data in accordinace with the object structure found in objectStructure.txt
+        string stringifiedObject = "";
+        stringifiedObject += goalText + "\n";
+        stringifiedObject += isCompleted.ToString() + "\n";
+        stringifiedObject += pointValue.ToString() + "\n";
+        stringifiedObject += _bonusPoints.ToString() + "\n";
+        stringifiedObject += _currentCompletionChecks.ToString() + "\n";
+        stringifiedObject += _totalNeededCompletionChecks.ToString();
+
+        return stringifiedObject;
     }
 }

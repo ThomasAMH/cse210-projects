@@ -17,4 +17,14 @@ public abstract class Goal {
             Console.Write("[ ]");
         }
     }
+
+    public virtual string StringifyObject() {
+        //Store data in accordinace with the object structure found in objectStructure.txt
+        string stringifiedObject = "";
+        stringifiedObject += goalText + "\n";
+        stringifiedObject += isCompleted.ToString() + "\n";
+        stringifiedObject += pointValue.ToString();
+
+        return stringifiedObject;
+    }
 }

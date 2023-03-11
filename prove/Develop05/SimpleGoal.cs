@@ -17,4 +17,11 @@ class SimpleGoal : Goal {
         Console.WriteLine("Goal recorded. Press Enter to continue");
         string unused = Console.ReadLine();
     }
+
+    public SimpleGoal(string fileGoalText, bool fileIsCompleted, int filePointsValue) {
+        description = "These are one and done goals. Once you've checked them off, the points are yours.";
+        goalText = fileGoalText;
+        isCompleted = fileIsCompleted;
+        pointValue = filePointsValue;
+    }
 }

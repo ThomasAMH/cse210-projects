@@ -1,6 +1,6 @@
 using System.Text.Json;
 public class User {
-    private string userName = "Default Username";
+    public string userName = "Default Username";
     private bool isGamified = false;
     private List<SimpleGoal> _simpleGoals = new List<SimpleGoal>();
     private List<SimpleGoal> _completedSimpleGoals = new List<SimpleGoal>();
@@ -38,6 +38,65 @@ public class User {
         Console.WriteLine("Noted, thanks! Let's get started! :) (Press Enter)");
         userInput = Console.ReadLine();
         Console.WriteLine("");
+    }
+
+    public User(List<string> fileData) {
+        userName = fileData[0];
+        pointsTotal = int.Parse(fileData[1]);      
+        isGamified = Convert.ToBoolean(fileData[2]);
+        int i = 0;
+        int j = 0;
+
+        if (int.Parse(fileData[3]) > 0) {
+            //If there are simple goals, they will start at row 9. Each goal contains 3 rows of data.
+            j = 8;
+            for(i = 0; i < int.Parse(fileData[3]); i++) {
+                SimpleGoal fileGoal = new SimpleGoal(fileData[j], Convert.ToBoolean(fileData[j+1]), int.Parse(fileData[j+2]));
+                _simpleGoals.Add(fileGoal);
+                j = j + 3;
+            }
+        }
+        
+        if(int.Parse(fileData[4]) > 0) {
+            if (j == 0) {j = 8;}
+            
+            for(i = 0; i < int.Parse(fileData[4]); i++) {
+                EternalGoal fileGoal = new EternalGoal(fileData[j], Convert.ToBoolean(fileData[j+1]), int.Parse(fileData[j+2]));
+                _eternalGoals.Add(fileGoal);
+                j = j + 3;
+            }
+        }
+
+        if(int.Parse(fileData[5]) > 0) {
+            if (j == 0) {j = 8;}
+            
+            for(i = 0; i < int.Parse(fileData[5]); i++) {
+                ChecklistGoal fileGoal = new ChecklistGoal(fileData[j], Convert.ToBoolean(fileData[j+1]), int.Parse(fileData[j+2]), int.Parse(fileData[j+3]), int.Parse(fileData[j+4]), int.Parse(fileData[j+5]));
+                _checklistGoals.Add(fileGoal);
+                j = j + 6;
+            }
+        }
+
+        if(int.Parse(fileData[6]) > 0) {
+            if (j == 0) {j = 8;}
+            
+            for(i = 0; i < int.Parse(fileData[6]); i++) {
+                SimpleGoal fileGoal = new SimpleGoal(fileData[j], Convert.ToBoolean(fileData[j+1]), int.Parse(fileData[j+2]));
+                _completedSimpleGoals.Add(fileGoal);
+                j = j + 3;
+            }
+        }
+
+        if(int.Parse(fileData[7]) > 0) {
+            if (j == 0) {j = 8;}
+            
+            for(i = 0; i < int.Parse(fileData[7]); i++) {
+                ChecklistGoal fileGoal = new ChecklistGoal(fileData[j], Convert.ToBoolean(fileData[j+1]), int.Parse(fileData[j+2]), int.Parse(fileData[j+3]), int.Parse(fileData[j+4]), int.Parse(fileData[j+5]));
+                _completedChecklistGoals.Add(fileGoal);
+                j = j + 6;
+            }
+        }
+        
     }
 
     public void NewGoal() {
@@ -179,9 +238,48 @@ public class User {
     }
 
     public string PackageObject() {
-        string objectString;
+        string objectString = "";
+        //Package object in accordance with objectStructure.txt
+        objectString += userName + "\n";
+        objectString += pointsTotal + "\n";
+        objectString += isGamified.ToString() + "\n";
+        objectString += _simpleGoals.Count.ToString() + "\n";
+        objectString += _eternalGoals.Count.ToString() + "\n";
+        objectString += _checklistGoals.Count.ToString() + "\n";
+        objectString += _completedSimpleGoals.Count.ToString() + "\n";
+        objectString += _completedChecklistGoals.Count.ToString() + "\n";
 
-        objectString = JsonSerializer.Serialize(_simpleGoals);
+        int i = 0;
+        if(_simpleGoals.Count > 0) {
+            for (i = 0; i <= _simpleGoals.Count - 1; i++) {
+            objectString +=  _simpleGoals[i].StringifyObject() + "\n";
+            }
+        }
+
+        if(_eternalGoals.Count > 0) {
+            for (i = 0; i <= _eternalGoals.Count - 1; i++) {
+            objectString +=  _eternalGoals[i].StringifyObject() + "\n";
+            }
+        }
+
+        if(_checklistGoals.Count() > 0) {
+            for (i = 0; i <= _checklistGoals.Count - 1; i++) {
+            objectString +=  _checklistGoals[i].StringifyObject() + "\n";
+            }
+        }
+
+        if(_completedSimpleGoals.Count > 0) {
+            for (i = 0; i <= _completedSimpleGoals.Count - 1; i++) {
+            objectString +=  _completedSimpleGoals[i].StringifyObject() + "\n";
+            }
+        }
+
+        if(_completedChecklistGoals.Count > 0) {
+            for (i = 0; i <= _completedChecklistGoals.Count - 1; i++) {
+            objectString +=  _completedChecklistGoals[i].StringifyObject() + "\n";
+            }
+        }
+
         return objectString;
     }
 }

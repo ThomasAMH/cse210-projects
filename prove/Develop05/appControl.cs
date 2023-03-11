@@ -137,27 +137,31 @@ class appControl {
     }
     
     private void LoadUserFromFile() {
+        Console.Clear();
+        Console.WriteLine("What is the user's name?");
+        string userString = Console.ReadLine();
+        List<string> fileData = new List<string>();
+
+        // try {
+            foreach(string line in System.IO.File.ReadLines(userString+".txt")) {
+                fileData.Add(line);
+            }
+            activeUser = new User(fileData);
+            Console.WriteLine("Welcome, " + activeUser.userName + "!");
+            Console.WriteLine("Press Enter to continue");
+            string unused = Console.ReadLine();
+
+        // } catch {
+        //     Console.WriteLine("I have no data on a user with that name!");
+        //     Console.WriteLine("Press Enter to continue");
+        //     string unused = Console.ReadLine();
+        // }
+
 
     }
 
-    private void WriteUserToFile() {
-        string jsonString = activeUser.PackageObject();
-
-        Console.WriteLine(jsonString);
-        Console.ReadLine();
+    private async void WriteUserToFile() {
+        string objectString = activeUser.PackageObject();
+        await File.WriteAllTextAsync(activeUser.userName+".txt", objectString);
     }
-
-    // private string UserToJSON() {
-    //     string UserJSON;
-    // private string UserToJSON() {
-    //     string UserJSON;
-    // // private string UserToJSON() {
-    // //     string UserJSON;
-        
-    // //     //return UserJSON;
-    // // }
-    //     return UserJSON;
-    // }
-    //     //return UserJSON;
-    // }
 }
